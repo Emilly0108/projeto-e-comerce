@@ -1,34 +1,31 @@
 import { useState, useEffect } from 'react'
-export default function Produto(){
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+export default function Produto({nome, img, precoAntigo, precoNovo}){
 
-    const API = "https://6a86e20f70fbbd308f9870ac.mockapi.io/caixa-eletronico/Produtos"
-    const [favorito, setFavorito] = useState("favoritar")
-    const [produtos, setProdutos] = useState([])
+    
+    const [favorito, setFavorito] = useState(false)
     function favoritar(){
-        setFavorito(favorito == "Favoritar" ? "Favoritado" : "Favoritar")
+        setFavorito(!favorito)
     }
 
-    useEffect(()=> {
-        fetch(API)
-        .then((resposta) => resposta.json())
-        .then((dados) => {setProdutos(dados)})
-    },[])
+    
    
 
     return(
         <>
-            {produtos.map((produto) => (
-                <div key= {produto.id}>
-                    <h3> {produto.nome} </h3>
-                    <img src={produto.img} width={150}/>
-
+            
+                <div>
                     <div>
-                        <button onClick={favoritar}>{favorito}</button> 
+                       {favorito?<FaHeart style={{cursor:"pointer", color: "red"}} onClick={favoritar}/>:<FaRegHeart style={{cursor:"pointer", color: "red"}} onClick={favoritar}/>}
                     </div>
-                    <p> preço antigo: {produto.precoAntigo}</p>
-                    <p> preço novo: {produto.precoNovo} </p>
+                    <h3> {nome} </h3>
+                    <img src={img} width={150}/>
+
+                    
+                    <p> preço antigo: {precoAntigo}</p>
+                    <p> preço novo: {precoNovo} </p>
                 </div>
-            ))}
+            
         </>
        
     )
