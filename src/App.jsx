@@ -1,3 +1,4 @@
+import { Link } from "react-router"
 import Meucomponente from "./components/MeuComponente.jsx"
 import Navbar from "./components/navbar.jsx"
 import Produto from "./components/produto.jsx"
@@ -13,6 +14,7 @@ function App() {
     },[])
   return (
     <div>
+      <Link to="produto">Link para Produto</Link>
       {produtos.map((produto) => 
        <Produto key={produto.id} nome={produto.nome} img={produto.img} precoAntigo={produto.precoAntigo} precoNovo={produto.precoNovo}></Produto>
       )}
